@@ -1,3 +1,4 @@
+import pathlib
 import torch
 import torch.nn as nn
 from torch.nn import functional as F
@@ -210,6 +211,8 @@ for iter in range(max_iters):
     optimizer.zero_grad(set_to_none=True)
     loss.backward()
     optimizer.step()
+
+torch.save(m.state_dict(), f"{pathlib.Path(__file__).parent.resolve()}/model.pt")
 
 # generate from the model
 context = torch.zeros((1, 1), dtype=torch.long, device=device)
